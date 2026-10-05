@@ -1,0 +1,27 @@
+# Example: triage Telegram channel posts. Questions in English, posts as they are.
+model: jev-latest
+state: "{text}"            # or a list of item fields: [text, views] → {"text": …, "views": …}
+questions:
+  is_ad:
+    type: noul
+    instructions: Is this post an advertisement or a paid promotion?
+    criteria:
+      true: Promotes a product, service, channel or event on someone's behalf, or carries an ad label
+      false: The author's own news, opinion, analysis or announcement with nothing sold
+  topic:
+    type: choice
+    instructions: What is the main topic of this post?
+    criteria:
+      technology: Software, hardware, AI, the internet and tech companies
+      politics: Governments, elections, laws, wars and diplomacy
+      economy: Markets, prices, companies' finances, jobs and money
+      culture: Books, films, music, art, sport and entertainment
+      other: A topic none of the options above covers
+  usefulness:
+    type: score
+    instructions: How much concrete, actionable information does this post give a reader?
+    criteria:
+      - Nothing to act on; a greeting, a joke, a reaction or pure opinion
+      - A news fact or claim without details a reader could use
+      - Specific details, numbers or steps a reader could use or check
+      - A how-to, a guide or a dense list of usable resources

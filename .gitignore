@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+# Answer caches and run outputs never belong in the repo
+*.sqlite
+*.sqlite-*
+out*.jsonl
+.env
+.claude/settings.local.json
+# The global gitignore hides this; this repo versions its CLAUDE.md.
+!CLAUDE.md

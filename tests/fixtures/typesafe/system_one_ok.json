@@ -1,0 +1,38 @@
+{
+  "model": "jev-1.13.0",
+  "answers": {
+    "is_ad": {
+      "type": "noul",
+      "noul": 0.03
+    },
+    "topic": {
+      "type": "choice",
+      "choice": "economy",
+      "confidence": 1.0,
+      "probabilities": {
+        "other": 0.0,
+        "economy": 1.0,
+        "politics": 0.0
+      }
+    },
+    "useful": {
+      "type": "score",
+      "score": 1.25,
+      "confidence": 0.6,
+      "legend": {
+        "0": "Nothing to act on",
+        "1": "A fact without details",
+        "2": "Specific usable details"
+      },
+      "probabilities": {
+        "0": 0.01,
+        "1": 0.73,
+        "2": 0.26
+      }
+    }
+  },
+  "usage": {
+    "input_tokens": 363,
+    "output_tokens": 76
+  }
+}

@@ -1,0 +1,78 @@
+[project]
+name = "jev-kit"
+version = "0.1.0"
+description = "Batch-evaluate texts with TypeSafe Jev from the command line — built for agents"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Ruslan Korneev", email = "shaggybackend@gmail.com" }]
+requires-python = ">=3.12"
+dependencies = [
+    "aiolimiter>=1.3.0",
+    "pyyaml>=6.0.3",
+    "rich>=15.0.0",
+    "typer>=0.27.2",
+    "typesafe-sdk>=0.7.2",
+]
+
+[project.scripts]
+jev = "jev_kit.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jev_kit"]
+
+[dependency-groups]
+dev = ["mypy>=1.11", "pytest>=8.0", "ruff>=0.6", "types-pyyaml>=6.0"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D",       # docstrings where they earn it, not on every def — the house style
+    "COM812",  # conflicts with the formatter
+    "ISC001",  # conflicts with the formatter
+    "FBT001",  # typer declares boolean CLI flags as positional-or-keyword parameters
+    "FBT002",  # same: a flag's default is part of its declaration
+    "PLR0913", # CLI commands take one parameter per option by design
+    "PLR0917", # same, for positional parameters
+    "EM101",   # messages are built inline and short; a `msg =` line per raise adds nothing
+    "EM102",   # same as EM101, for f-strings
+    "TRY003",  # every error message carries the fix, so it is long on purpose
+    "CPY001",  # the licence lives in LICENSE, not in a header per file
+    "TC001",   # typer and pydantic read annotations at runtime; keep imports real
+    "TC002",
+    "TC003",
+    "RUF001",  # · … — are the output format, not typos
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+    "S101",    # pytest asserts
+    "PLR2004", # expected values inline in test tables
+    "INP001",  # tests are not a package
+]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+files = ["src", "tests"]
+mypy_path = "src"
+plugins = ["pydantic.mypy"]
+
+[tool.basedpyright]
+# The gate is mypy strict; this only keeps the editor's pyright in step with it.
+typeCheckingMode = "standard"
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
+addopts = "-q"
