@@ -12,8 +12,15 @@ for question types, limits and prices.
 ## Install
 
 ```bash
-uv tool install --editable .            # puts `jev` on PATH (~/.local/bin)
-npx skills add . --skill jev -g -y      # installs the agent skill (~/.agents/skills, linked into ~/.claude/skills)
+uv tool install 'git+https://github.com/ruslan-korneev/jev-cli@v0.1.0'   # puts `jev` on PATH
+npx skills add ruslan-korneev/jev-cli -g                                # the agent skill, user-wide
+```
+
+From a local checkout, for development:
+
+```bash
+uv tool install --editable .
+npx skills add . --skill jev -g -y      # ~/.agents/skills/jev, linked into ~/.claude/skills
 ```
 
 The API key comes from `TYPESAFE_API_KEY`, or from `~/.config/typesafe/api_key` when the variable

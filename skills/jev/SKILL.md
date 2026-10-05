@@ -20,7 +20,7 @@ The source of truth for the API, the question types and their limits is
 ## Before the first command
 
 ```bash
-command -v jev || uv tool install --editable <path to the jev-kit checkout>
+command -v jev || uv tool install 'git+https://github.com/ruslan-korneev/jev-cli@v0.1.0'
 ```
 
 The key comes from `TYPESAFE_API_KEY`, or the file `~/.config/typesafe/api_key`. Never print it,

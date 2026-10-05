@@ -32,6 +32,10 @@ uv tool install --editable . --reinstall   # refresh the `jev` on PATH
 
 ## Rules for this repo
 
+- Releases: the version in `pyproject.toml` and `jev_kit/__init__.py` equals the git tag
+  (`v0.1.0`), and the install lines in `skills/jev/SKILL.md` and README pin that tag
+  (`…/jev-cli@vX.Y.Z`). Bump all of them together, then push the commit and the tag;
+  `tests/unit/test_release_pins.py` fails on a mismatch.
 - The API key comes from `TYPESAFE_API_KEY` or `~/.config/typesafe/api_key`. Never print, log or
   commit it; tests use a fake key and a mock transport.
 - Recorded API responses live in `tests/fixtures/typesafe/`; re-record them rather than hand-edit.
